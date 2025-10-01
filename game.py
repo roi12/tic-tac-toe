@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import math
 import random
+import sys
 from dataclasses import dataclass
 from typing import List, Optional, Tuple
 
@@ -379,14 +380,18 @@ class TicTacToeGame(QMainWindow):
         return best_score, best_move
 
 
-def main() -> None:
-    """Entry point that instantiates the application and starts the event loop."""
+def main() -> int:
+    """Instantiate the application and run the Qt event loop.
 
-    app = QApplication([])
+    Returning an integer exit code makes it easier to integrate the
+    application with scripts or tests that launch the GUI.
+    """
+
+    app = QApplication(sys.argv)
     game = TicTacToeGame()
     game.show()
-    app.exec_()
+    return app.exec_()
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
